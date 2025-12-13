@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abdelali Latifi | Portfolio</title>
     
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Fonts: Exo 2 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- LENIS SMOOTH SCROLL SCRIPT -->
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script> 
 
     <style>
         /* =========================================
@@ -20,7 +27,7 @@
             --bg-card: rgba(255, 255, 255, 0.03);
             
             --text-main: #ffffff;
-            --text-muted: #94a3b8;
+            --text-muted: #a3b3c8;
             
             --accent-primary: #d946ef;
             --accent-secondary: #8b5cf6;
@@ -35,16 +42,24 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         html { 
-            scroll-behavior: smooth; 
             -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
+
+        /* LENIS RECOMMENDED CSS */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { oversizer-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-scrolling iframe { pointer-events: none; }
 
         body {
             background-color: var(--bg-deep);
             color: var(--text-main);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Exo 2', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
+            letter-spacing: 0.02em;
         }
 
         /* The Canvas for Stars */
@@ -104,37 +119,36 @@
             z-index: 1;
         }
 
-        /* --- LEFT SIDEBAR (FIXED ABSOLUTELY) --- */
+        /* --- LEFT SIDEBAR (FIXED) --- */
         .left-sidebar {
             width: 40%;
             height: 100vh;
-            position: fixed; /* Changed from sticky to fixed */
+            position: fixed; 
             top: 0;
             left: 0;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Keeps Nav at top, Name at bottom */
+            justify-content: space-between; 
             padding: 60px 50px;
-            background: rgba(5, 5, 5, 0.8); 
+            background: rgba(5, 5, 5, 0.85); 
             backdrop-filter: blur(20px);
             border-right: 1px solid var(--border-glass);
             z-index: 10;
         }
 
-        /* --- RIGHT CONTENT (SCROLLABLE) --- */
+        /* --- RIGHT CONTENT --- */
         .right-content {
             width: 60%;
-            margin-left: 40%; /* Pushes content to the right so it doesn't go under sidebar */
+            margin-left: 40%; 
             background: transparent; 
             position: relative;
         }
 
         /* =========================================
-           3. NAVIGATION (ENHANCED DIAMONDS)
+           3. NAVIGATION 
            ========================================= */
         .nav-wrapper {
             position: relative;
-            /* Ensures wrapper doesn't collapse */
             padding-top: 20px; 
         }
 
@@ -145,22 +159,21 @@
             transform: rotate(45deg);
             padding: 20px;
             margin-bottom: 40px;
-            /* Center the grid horizontally in the sidebar */
             margin-left: auto;
             margin-right: auto;
             width: fit-content;
         }
 
         .nav-item {
-            width: 160px;
-            height: 160px;
+            width: 140px;
+            height: 140px;
             background: rgba(30, 30, 30, 0.6);
             border: 2px solid var(--border-glass);
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s ease;
             border-radius: 20px;
             text-decoration: none;
             position: relative;
@@ -170,8 +183,8 @@
         .nav-item span {
             transform: rotate(-45deg);
             font-weight: 700;
-            font-size: 0.8rem;
-            letter-spacing: 1.5px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--text-muted);
             transition: all 0.3s;
@@ -179,7 +192,6 @@
             position: relative;
         }
 
-        /* Animated background gradient */
         .nav-item::before {
             content: '';
             position: absolute;
@@ -191,22 +203,12 @@
             border-radius: 18px;
         }
 
-        /* Inner glow effect */
-        .nav-item::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center, rgba(217, 70, 239, 0.2), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-
         .nav-item:hover {
-            transform: scale(1.08) ;
+            transform: scale(1.08);
             border-color: var(--accent-primary);
         }
 
-        .nav-item:hover::after { opacity: 1; }
+        .nav-item:hover::before { opacity: 0.1; }
 
         .nav-item.active {
             box-shadow: var(--shadow-glow);
@@ -215,10 +217,10 @@
         }
 
         .nav-item.active::before { opacity: 1; }
-        .nav-item.active::after { opacity: 1; }
+        
         .nav-item.active span { 
             color: white; 
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
         }
 
         /* --- PROFILE NAME --- */
@@ -228,8 +230,8 @@
         }
         
         .profile-static h1 { 
-            font-size: 2.8rem; 
-            font-weight: 900; 
+            font-size: 3rem;
+            font-weight: 800;
             line-height: 1.1;
             margin-bottom: 8px;
             background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
@@ -239,7 +241,7 @@
         }
         
         .profile-static h2 { 
-            font-size: 1rem; 
+            font-size: 1.1rem; 
             color: var(--accent-primary); 
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -249,9 +251,10 @@
 
         .profile-static p {
             color: var(--text-muted);
-            line-height: 1.7;
-            font-size: 0.95rem;
+            line-height: 1.8;
+            font-size: 1rem;
             max-width: 400px;
+            font-weight: 400;
         }
 
         @keyframes fadeInUp {
@@ -280,7 +283,8 @@
             -webkit-text-fill-color: transparent;
             width: fit-content;
             position: relative;
-            letter-spacing: -2px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
         }
 
         .section-heading::after {
@@ -289,18 +293,51 @@
             bottom: -10px;
             left: 0;
             width: 60px;
-            height: 4px;
+            height: 5px;
             background: var(--accent-gradient);
             border-radius: 2px;
         }
 
         .highlight { 
             color: var(--accent-primary); 
-            font-weight: 700;
+            font-weight: 800;
             position: relative;
         }
 
-        /* --- HOME PROFILE IMAGE --- */
+        /* --- TYPEWRITER ANIMATION STYLES --- */
+        
+        /* Cursor styling */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+            color: var(--accent-primary);
+            font-weight: 400;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Hidden state for animation elements */
+        .hidden-text {
+            visibility: hidden; /* Takes up space but invisible */
+        }
+        
+        /* Fade in for the button */
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .fade-in-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HOME --- */
         .home-container {
             display: flex;
             align-items: center;
@@ -317,7 +354,6 @@
             justify-content: center;
         }
         
-        /* Spinning Border with Multiple Layers */
         .img-wrapper::before {
             content: '';
             position: absolute;
@@ -369,7 +405,7 @@
         /* --- BUTTONS --- */
         .btn-glow {
             display: inline-block;
-            padding: 16px 40px;
+            padding: 16px 45px;
             background: var(--accent-gradient);
             color: white;
             font-weight: 700;
@@ -379,7 +415,9 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
         }
 
         .btn-glow::before {
@@ -400,7 +438,7 @@
             left: 100%;
         }
 
-        /* --- TECH GRID (Enhanced Glass Cards) --- */
+        /* --- TECH GRID --- */
         .tech-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -453,14 +491,14 @@
         }
 
         .tech-item span { 
-            font-size: 0.9rem; 
+            font-size: 0.95rem; 
             color: #e0e0e0;
             font-weight: 600;
             position: relative;
             z-index: 1;
         }
 
-        /* --- PROJECTS (Premium Glass Cards) --- */
+        /* --- PROJECTS --- */
         .project-card {
             background: var(--bg-card);
             backdrop-filter: blur(15px);
@@ -494,7 +532,6 @@
             opacity: 1;
         }
         
-        /* Accent line on left */
         .project-card::after {
             content: '';
             position: absolute;
@@ -509,17 +546,21 @@
         }
 
         .project-card h3 { 
-            font-size: 1.8rem; 
+            font-size: 2rem; 
             margin-bottom: 15px; 
             color: white;
             font-weight: 800;
             position: relative;
             z-index: 1;
+            letter-spacing: 0.5px;
         }
 
         .project-card p {
             position: relative;
             z-index: 1;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            font-weight: 400;
         }
 
         .project-tags { 
@@ -531,14 +572,15 @@
             z-index: 1;
         }
         .project-tags span {
-            background: rgba(139, 92, 246, 0.2);
+            background: rgba(139, 92, 246, 0.15);
             color: #e9d5ff;
-            padding: 8px 16px;
-            font-size: 0.8rem;
+            padding: 8px 18px;
+            font-size: 0.85rem;
             border-radius: 20px;
             font-weight: 600;
             border: 1px solid rgba(139, 92, 246, 0.3);
             transition: all 0.3s;
+            letter-spacing: 0.5px;
         }
 
         .project-tags span:hover {
@@ -552,7 +594,7 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             margin-bottom: 25px;
             color: var(--text-muted);
             text-decoration: none;
@@ -562,6 +604,7 @@
             border: 1px solid transparent;
             position: relative;
             overflow: hidden;
+            font-weight: 500;
         }
 
         .contact-links a::before {
@@ -620,7 +663,7 @@
             .left-sidebar { 
                 width: 100%; 
                 height: auto; 
-                position: relative; /* Back to normal flow */
+                position: relative; 
                 top: auto; 
                 left: auto;
                 padding: 40px 25px; 
@@ -644,14 +687,14 @@
                 padding: 0 20px; border-radius: 25px; 
             }
             .nav-item:hover, .nav-item.active { transform: scale(1.05); }
-            .nav-item span { transform: rotate(0); font-size: 0.75rem; }
+            .nav-item span { transform: rotate(0); font-size: 0.8rem; letter-spacing: 1px; }
             
             section { min-height: auto; padding: 60px 30px; }
             .section-heading { font-size: 2.5rem; margin-bottom: 40px; }
             
             .home-container { flex-direction: column-reverse; text-align: center; gap: 40px; }
             .profile-static { text-align: center; }
-            .profile-static h1 { font-size: 2.2rem; }
+            .profile-static h1 { font-size: 2.5rem; }
             .profile-static p { max-width: 100%; }
 
             .img-wrapper { width: 200px; height: 200px; }
@@ -687,7 +730,7 @@
         <aside class="left-sidebar">
             <div class="nav-wrapper">
                 <div class="diamond-grid">
-                    <a href="#home" class="nav-item active"><span>Home</span></a>
+                    <a href="#home" class="nav-item active"><span>About</span></a>
                     <a href="#technologies" class="nav-item"><span>Tech</span></a>
                     <a href="#projects" class="nav-item"><span>Work</span></a>
                     <a href="#contact" class="nav-item"><span>Contact</span></a>
@@ -696,8 +739,8 @@
 
             <div class="profile-static">
                 <h1>Abdelali Latifi</h1>
-                <h2>Développeur Full-Stack</h2>
-                <p>Étudiant à YouCode - UM6P, passionné par la création d'expériences web modernes et performantes.</p>
+                <h2>Full-Stack Developer</h2>
+                <p>Student at YouCode - UM6P, passionate about creating modern and high-performance web experiences.</p>
             </div>
         </aside>
 
@@ -708,14 +751,17 @@
             <section id="home">
                 <div class="home-container">
                     <div class="home-text">
-                        <h2 class="section-heading" style="font-size: 3rem; margin-bottom: 25px;">
-                            Construire le futur <br> du web.
+                        <!-- ID added for typewriter targeting -->
+                        <h2 id="type-heading" class="section-heading hidden-text" style="font-size: 3rem; margin-bottom: 25px;">
+                            Building the future <br> of the web.
                         </h2>
-                        <p style="font-size: 1.15rem; line-height: 1.9; color: var(--text-muted); margin-bottom: 35px;">
-                            Bonjour, je suis un développeur passionné basé à <span class="highlight">Casablanca</span>. 
-                            Je transforme des idées complexes en applications web élégantes, performantes et centrées sur l'utilisateur.
+                        <!-- ID added for typewriter targeting -->
+                        <p id="type-text" class="hidden-text" style="font-size: 1.2rem; line-height: 1.9; color: var(--text-muted); margin-bottom: 35px; font-weight: 400;">
+                            Hello, I am a passionate developer based in <span class="highlight">Casablanca</span>. 
+                            I transform complex ideas into elegant, high-performance, and user-centric web applications.
                         </p>
-                        <a href="#projects" class="btn-glow">Voir mes projets</a>
+                        <!-- Added fade-in class -->
+                        <a id="home-cta" href="#projects" class="btn-glow fade-in-element">View my projects</a>
                     </div>
                     
                     <div class="img-wrapper">
@@ -728,7 +774,7 @@
 
             <!-- TECH SECTION -->
             <section id="technologies">
-                <h2 class="section-heading">Stack Technique</h2>
+                <h2 class="section-heading">Tech Stack</h2>
                 <div class="tech-grid">
                     <div class="tech-item"><i class="devicon-html5-plain colored"></i><span>HTML5</span></div>
                     <div class="tech-item"><i class="devicon-css3-plain colored"></i><span>CSS3</span></div>
@@ -747,11 +793,11 @@
 
             <!-- PROJECTS SECTION -->
             <section id="projects">
-                <h2 class="section-heading">Projets Récents</h2>
+                <h2 class="section-heading">Recent Projects</h2>
                 
                 <div class="project-card">
                     <h3>The_Delivry</h3>
-                    <p style="color: var(--text-muted); line-height: 1.7;">Plateforme logistique web automatisant la gestion des colis et le suivi en temps réel à travers le Maroc, optimisant les tournées de livraison avec des algorithmes avancés.</p>
+                    <p style="color: var(--text-muted);">Web logistics platform automating parcel management and real-time tracking across Morocco, optimizing delivery routes with advanced algorithms.</p>
                     <div class="project-tags">
                         <span>Spring Boot</span><span>Angular</span><span>Docker</span><span>CI/CD</span>
                     </div>
@@ -759,7 +805,7 @@
 
                 <div class="project-card">
                     <h3>Smart_Shop</h3>
-                    <p style="color: var(--text-muted); line-height: 1.7;">API REST robuste pour la gestion des clients, intégrant un système de fidélité complexe et des modules de paiements fractionnés avec une architecture évolutive.</p>
+                    <p style="color: var(--text-muted);">Robust REST API for client management, integrating a complex loyalty system and split payment modules with a scalable architecture.</p>
                     <div class="project-tags">
                         <span>Spring Security</span><span>JPA</span><span>Swagger</span><span>JUnit</span>
                     </div>
@@ -767,7 +813,7 @@
 
                 <div class="project-card">
                     <h3>Blue_Waves</h3>
-                    <p style="color: var(--text-muted); line-height: 1.7;">Solution de gestion hôtelière complète centralisant les réservations, l'attribution des chambres et la base de données clients avec interface intuitive.</p>
+                    <p style="color: var(--text-muted);">Complete hotel management solution centralizing reservations, room assignment, and client database with an intuitive interface.</p>
                     <div class="project-tags">
                         <span>Laravel</span><span>PostgreSQL</span><span>JavaScript</span>
                     </div>
@@ -776,7 +822,7 @@
 
             <!-- CONTACT SECTION -->
             <section id="contact">
-                <h2 class="section-heading">Me Contacter</h2>
+                <h2 class="section-heading">Contact Me</h2>
                 <div class="contact-links">
                     <a href="mailto:abdelalilatifi3@gmail.com"><i class="fa-solid fa-envelope"></i> abdelalilatifi3@gmail.com</a>
                     <a href="https://linkedin.com/in/abdelali-latifi" target="_blank"><i class="fa-brands fa-linkedin"></i> linkedin.com/in/abdelali-latifi</a>
@@ -791,14 +837,28 @@
     <!-- 4. JAVASCRIPT LOGIC -->
     <script>
         /**
-         * ENHANCED ANIMATED STAR BACKGROUND
+         * 1. LENIS INITIALIZATION
+         */
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
+
+        /**
+         * 2. ANIMATED STAR BACKGROUND
          */
         const canvas = document.getElementById('star-canvas');
         const ctx = canvas.getContext('2d');
 
         let width, height, centerX, centerY;
         let stars = [];
-        const numStars = 300;
+        const numStars = 150;
         let mouseX = 0, mouseY = 0;
 
         function resize() {
@@ -817,17 +877,14 @@
             }
 
             reset() {
-                // Start from center for warp effect
                 const angle = Math.random() * Math.PI * 2;
                 const distance = Math.random() * Math.max(width, height);
-                
                 this.x = centerX + Math.cos(angle) * distance;
                 this.y = centerY + Math.sin(angle) * distance;
                 this.z = Math.random() * 2000 + 1000;
                 this.pz = this.z;
-                
-                this.size = Math.random() * 2 + 0.5;
-                this.speed = Math.random() * 3 + 1;
+                this.size = Math.random() * 0.75 + 0.5;
+                this.speed = Math.random() * 1.75 + 1;
                 this.alpha = Math.random() * 0.8 + 0.2;
                 this.twinkleSpeed = Math.random() * 0.03 + 0.01;
                 this.twinklePhase = Math.random() * Math.PI * 2;
@@ -836,164 +893,172 @@
             update() {
                 this.pz = this.z;
                 this.z -= this.speed * 2;
-                
-                // Reset if star goes behind camera
-                if (this.z < 1) {
-                    this.reset();
-                }
-                
-                // Twinkling effect
+                if (this.z < 1) this.reset();
                 this.twinklePhase += this.twinkleSpeed;
                 this.alpha = 0.5 + Math.sin(this.twinklePhase) * 0.3;
             }
 
             draw() {
-                // 3D projection
                 const sx = ((this.x - centerX) * 1000) / this.z + centerX;
                 const sy = ((this.y - centerY) * 1000) / this.z + centerY;
-                
                 const psx = ((this.x - centerX) * 1000) / this.pz + centerX;
                 const psy = ((this.y - centerY) * 1000) / this.pz + centerY;
-                
-                // Size based on distance
                 const size = this.size * (1000 / this.z);
                 
-                // Check if star is in view
                 if (sx < -50 || sx > width + 50 || sy < -50 || sy > height + 50) {
                     this.reset();
                     return;
                 }
                 
-                // Calculate trail length
                 const trailLength = Math.abs(psx - sx);
-                
-                // Draw motion trail
                 if (trailLength > 0.5) {
                     ctx.beginPath();
                     ctx.moveTo(psx, psy);
                     ctx.lineTo(sx, sy);
-                    
                     const gradient = ctx.createLinearGradient(psx, psy, sx, sy);
                     gradient.addColorStop(0, `rgba(255, 255, 255, 0)`);
                     gradient.addColorStop(1, `rgba(255, 255, 255, ${this.alpha * 0.8})`);
-                    
                     ctx.strokeStyle = gradient;
                     ctx.lineWidth = Math.min(size * 0.5, 2);
                     ctx.stroke();
                 }
                 
-                // Draw star glow
                 const glowSize = size * 3;
                 const glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, glowSize);
                 glow.addColorStop(0, `rgba(217, 70, 239, ${this.alpha * 0.4})`);
                 glow.addColorStop(0.5, `rgba(139, 92, 246, ${this.alpha * 0.2})`);
                 glow.addColorStop(1, 'rgba(255, 255, 255, 0)');
-                
                 ctx.fillStyle = glow;
                 ctx.fillRect(sx - glowSize, sy - glowSize, glowSize * 2, glowSize * 2);
-                
-                // Draw star core
-                ctx.beginPath();
-                ctx.arc(sx, sy, size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
-                ctx.fill();
-                
-                // Add sparkle for larger stars
-                if (size > 1.5 && Math.random() > 0.95) {
-                    ctx.strokeStyle = `rgba(255, 255, 255, ${this.alpha * 0.6})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.beginPath();
-                    ctx.moveTo(sx - size * 2, sy);
-                    ctx.lineTo(sx + size * 2, sy);
-                    ctx.moveTo(sx, sy - size * 2);
-                    ctx.lineTo(sx, sy + size * 2);
-                    ctx.stroke();
-                }
             }
         }
 
         function initStars() {
             stars = [];
-            for (let i = 0; i < numStars; i++) {
-                stars.push(new Star());
-            }
+            for (let i = 0; i < numStars; i++) stars.push(new Star());
         }
 
-        function animate() {
-            // Fade effect instead of clear for trail persistence
+        function animate(time) {
+            lenis.raf(time);
             ctx.fillStyle = 'rgba(2, 2, 4, 0.3)';
             ctx.fillRect(0, 0, width, height);
-            
-            stars.forEach(star => {
-                star.update();
-                star.draw();
-            });
-            
+            stars.forEach(star => { star.update(); star.draw(); });
             requestAnimationFrame(animate);
         }
 
-        // Mouse interaction - subtle parallax
-        document.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX - centerX) * 0.01;
-            mouseY = (e.clientY - centerY) * 0.01;
-            
-            stars.forEach(star => {
-                star.x += mouseX * (star.z / 1000);
-                star.y += mouseY * (star.z / 1000);
-            });
-        });
-
         window.addEventListener('resize', resize);
         resize();
-        animate();
+        requestAnimationFrame(animate);
 
         /**
-         * NAVIGATION & SCROLL LOGIC
+         * 3. TYPEWRITER ANIMATION LOGIC
+         */
+        document.addEventListener("DOMContentLoaded", function() {
+            const heading = document.getElementById('type-heading');
+            const paragraph = document.getElementById('type-text');
+            const btn = document.getElementById('home-cta');
+
+            // Store original HTML to preserve <br> and <span>
+            const headingText = heading.innerHTML.trim();
+            const paragraphText = paragraph.innerHTML.trim();
+
+            // Clear content and make visible
+            heading.innerHTML = "";
+            paragraph.innerHTML = "";
+            heading.classList.remove('hidden-text');
+            heading.classList.add('typing-cursor');
+            
+            // Typewriter function that respects HTML tags
+            function typeHtml(element, text, speed, callback) {
+                let i = 0;
+                
+                function type() {
+                    if (i < text.length) {
+                        // If we encounter a tag opening
+                        if (text.substring(i, i + 1) === '<') {
+                            // Find the closing bracket
+                            let tagEnd = text.indexOf('>', i);
+                            // Append the whole tag at once
+                            element.innerHTML += text.substring(i, tagEnd + 1);
+                            i = tagEnd + 1;
+                        } else {
+                            element.innerHTML += text.charAt(i);
+                            i++;
+                        }
+                        setTimeout(type, speed);
+                    } else {
+                        if (callback) callback();
+                    }
+                }
+                type();
+            }
+
+            // Start Animation Sequence
+            // 1. Type Heading
+            setTimeout(() => {
+                typeHtml(heading, headingText, 50, () => {
+                    heading.classList.remove('typing-cursor'); // Remove cursor from heading
+                    
+                    // 2. Type Paragraph
+                    paragraph.classList.remove('hidden-text');
+                    paragraph.classList.add('typing-cursor');
+                    
+                    typeHtml(paragraph, paragraphText, 20, () => {
+                        paragraph.classList.remove('typing-cursor');
+                        
+                        // 3. Fade in Button
+                        btn.classList.add('visible');
+                    });
+                });
+            }, 500); // Initial delay
+        });
+
+        /**
+         * 4. NAVIGATION & SCROLL LOGIC
          */
         const navItems = document.querySelectorAll('.nav-item');
         const sections = document.querySelectorAll('section');
         const progressBar = document.getElementById('progressBar');
+        const glowBtn = document.querySelector('.btn-glow');
 
-        // Smooth scroll to section
+        function smoothScrollTo(targetId) {
+            lenis.scrollTo(targetId, {
+                offset: 0, duration: 1.5,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+            });
+        }
+
         navItems.forEach(item => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetId = item.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                if (targetSection) {
-                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                
-                // Update active state
+                smoothScrollTo(targetId);
                 navItems.forEach(nav => nav.classList.remove('active'));
                 item.classList.add('active');
             });
         });
 
-        // Update progress bar and active nav on scroll
-        window.addEventListener('scroll', () => {
-            // Progress bar
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollPercent = (scrollTop / scrollHeight) * 100;
-            progressBar.style.width = scrollPercent + '%';
+        if(glowBtn) {
+            glowBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = glowBtn.getAttribute('href');
+                smoothScrollTo(targetId);
+            });
+        }
+
+        lenis.on('scroll', (e) => {
+            const scrollTop = e.scroll;
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            progressBar.style.width = (scrollTop / scrollHeight) * 100 + '%';
             
-            // Active section detection
             let current = '';
             sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (window.pageYOffset >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
+                if (scrollTop >= section.offsetTop - 250) current = section.getAttribute('id');
             });
             
             navItems.forEach(item => {
                 item.classList.remove('active');
-                if (item.getAttribute('href') === '#' + current) {
-                    item.classList.add('active');
-                }
+                if (item.getAttribute('href') === '#' + current) item.classList.add('active');
             });
         });
     </script>
